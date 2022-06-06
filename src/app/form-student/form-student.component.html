@@ -1,0 +1,87 @@
+<div class="flex justify-content-center">
+  <div class="w-max" [formGroup]="registerForm">
+    <div class="field relative">
+      <label for="registrationDate" class="mr-3 w-8rem text-right"
+        >วันที่ลงทะเบียน:
+      </label>
+      <p-calendar
+        formControlName="registrationDate"
+        [showIcon]="true"
+        [style]="{ minWidth: '300px' }"
+      ></p-calendar>
+      <p-message
+        severity="error"
+        text="กรุณาระบุวันที่ลงทะเบียน"
+        class="err-message mx-2"
+        *ngIf="
+          registerForm.get('registrationDate')?.invalid &&
+          registerForm.controls['registrationDate'].touched
+        "
+      ></p-message>
+    </div>
+    <div class="field relative">
+      <label for="student" class="mr-3 w-8rem text-right">ชื่อนักศึกษา: </label>
+      <p-dropdown
+        formControlName="student"
+        [options]="(studentList$ | async) ?? []"
+        [style]="{ minWidth: '300px' }"
+        [showClear]="true"
+        optionLabel="firstName"
+        [filter]="true"
+        placeholder="เลือกวิชานักศึกษา"
+      >
+        <ng-template let-student pTemplate="item">
+          <div class="option-row">
+            <div class="">{{ student.firstName }} {{ student.lastName }}</div>
+          </div>
+        </ng-template></p-dropdown
+      >
+      <p-message
+        severity="error"
+        text="กรุณาระบุวันที่ลงทะเบียน"
+        class="err-message mx-2"
+        *ngIf="
+          registerForm.get('student')?.invalid &&
+          registerForm.controls['student'].touched
+        "
+      ></p-message>
+    </div>
+    <div class="field relative">
+      <label for="registrationDate" class="mr-3 w-8rem text-right"
+        >รายวิชา:
+      </label>
+      <p-dropdown
+        formControlName="course"
+        [options]="(courseList$ | async) ?? []"
+        [style]="{ minWidth: '300px' }"
+        optionLabel="name"
+        [showClear]="true"
+        [filter]="true"
+        placeholder="เลือกวิชา"
+      ></p-dropdown>
+      <p-message
+        severity="error"
+        text="กรุณาระบุวันที่ลงทะเบียน"
+        class="err-message mx-2"
+        *ngIf="
+          registerForm.get('course')?.invalid &&
+          registerForm.controls['course'].touched
+        "
+      ></p-message>
+    </div>
+    <div class="field relative">
+      <label for="credit" class="mr-3 w-8rem text-right">ราคาหน่วยกิต: </label>
+      <input type="text" pInputText style="width: 300px" id="credit" disabled />
+    </div>
+    <div class="field flex align-items-center relative">
+      <label for="status" class="mr-3 w-8rem text-right">สถานะ: </label>
+      <p-inputSwitch id="status" formControlName="status"></p-inputSwitch>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-content-center gap-2">
+  <button pButton (click)="save()">บันทึก</button>
+  <button pButton (click)="registerForm.reset()">ยกเลิก</button>
+  <button pButton (click)="goBack()">กลับ</button>
+</div>

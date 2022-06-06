@@ -103,5 +103,7 @@
       }
     }
   },
-  "defaultProject": "student-ui"
+  "cli": {
+    "analytics": "f1825df4-7663-4e4a-aa98-818022da4cbd"
+  }
 }

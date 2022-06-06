@@ -1,0 +1,95 @@
+<h1>Registration Online</h1>
+<div class="flex justify-content-center" [formGroup]="registerForm">
+  <div class="lg:w-7 md:w-9 sm:w-12 flex flex-wrap">
+    <div class="field md:col-6">
+      <label for="firstName" class="w-5rem text-right mr-3">ชื่อ:</label>
+      <input
+        type="text"
+        id="firstName"
+        style="width: 300px"
+        pInputText
+        formControlName="firstName"
+      />
+    </div>
+    <div class="field md:col-6">
+      <label for="lastName" class="w-5rem text-right mr-3">นามสกุล:</label>
+      <input
+        type="text"
+        id="lastName"
+        style="width: 300px"
+        pInputText
+        formControlName="lastName"
+      />
+    </div>
+    <div class="field md:col-6">
+      <label for="email" class="w-5rem text-right mr-3">อีเมล:</label>
+      <input
+        type="text"
+        id="email"
+        style="width: 300px"
+        pInputText
+        formControlName="email"
+      />
+    </div>
+    <div class="field md:col-6">
+      <label for="course" class="w-5rem text-right mr-3">รายวิชา:</label>
+      <p-dropdown
+        [options]="(courseList$ | async) ?? []"
+        [style]="{ minWidth: '300px' }"
+        optionLabel="name"
+        formControlName="course"
+        [showClear]="true"
+        [filter]="true"
+        placeholder="เลือกวิชา"
+      ></p-dropdown>
+    </div>
+    <div class="field col-6 align-items-center flex">
+      <label for="status" class="w-5rem text-right mr-3">สถานะ:</label>
+      <p-inputSwitch id="status" formControlName="status"></p-inputSwitch>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-2 justify-content-center">
+  <button pButton (click)="search()">ค้นหา</button>
+  <button pButton (click)="reset()">ยกเลิก</button>
+</div>
+<div class="flex gap-2 justify-content-end px-5">
+  <button pButton [routerLink]="['/add-student']">
+    <i class="pi pi-plus-circle mx-1"></i> เพิ่ม
+  </button>
+</div>
+
+<div class="mt-4 p-5">
+  <p-table [value]="filteredRegisterData">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>วันที่ลงทะเบียน</th>
+        <th>ชื่อ-นามสกุล</th>
+        <th>รายวิชา</th>
+        <th>อีเมล์</th>
+        <th>เบอร์โทร</th>
+        <th>สถานะ</th>
+        <!-- <th></th> -->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-register>
+      <tr>
+        <td>{{ register.registrationDate | date }}</td>
+        <td>
+          {{ register.student.firstName }} {{ register.student.lastName }}
+        </td>
+        <td>{{ register.course.name }}</td>
+        <td>{{ register.student.email }}</td>
+        <td>{{ register.student.phoneNumber }}</td>
+        <td>{{ register.status | status }}</td>
+        <!-- <td>
+          <div class="flex gap-2">
+            <button pButton><i class="pi pi-pencil"></i></button>
+            <button pButton><i class="pi pi-trash"></i></button>
+          </div>
+        </td> -->
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
