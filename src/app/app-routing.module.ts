@@ -11,14 +11,14 @@ const routes: Routes = [
     component: StudentListComponent,
   },
   {
-    path: 'add-student',
+    path: 'add-register',
     component: FormStudentComponent,
     data: {
       mode: Mode.ADD,
     },
   },
   {
-    path: 'edit-student/:id',
+    path: 'edit-register/:id',
     component: FormStudentComponent,
     data: {
       mode: Mode.Edit,

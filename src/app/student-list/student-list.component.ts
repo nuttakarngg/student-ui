@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Course } from '../shared/interfaces/Course';
 import { Registration } from '../shared/interfaces/Registration';
 import { CourseService } from '../shared/services/course.service';
@@ -23,7 +24,9 @@ export class StudentListComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private formBuilder: FormBuilder,
-    private registrationService: RegistrationService
+    private registrationService: RegistrationService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
   reset() {
     this.registerForm.reset();
@@ -67,4 +70,20 @@ export class StudentListComponent implements OnInit {
     });
   }
   ngOnInit(): void {}
+
+  deleteRegistration(index: number, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Are you sure that you want to proceed?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.registrationService.deleteRegistration(index);
+        this.messageService.add({
+          severity: 'success',
+          data: 'Success',
+          detail: 'ลบสำเร็จ!',
+        });
+      },
+    });
+  }
 }

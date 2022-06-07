@@ -58,6 +58,7 @@
         [showClear]="true"
         [filter]="true"
         placeholder="เลือกวิชา"
+        (onChange)="setCredit($event)"
       ></p-dropdown>
       <p-message
         severity="error"
@@ -71,7 +72,13 @@
     </div>
     <div class="field relative">
       <label for="credit" class="mr-3 w-8rem text-right">ราคาหน่วยกิต: </label>
-      <input type="text" pInputText style="width: 300px" id="credit" disabled />
+      <input
+        type="text"
+        pInputText
+        style="width: 300px"
+        id="credit"
+        formControlName="price"
+      />
     </div>
     <div class="field flex align-items-center relative">
       <label for="status" class="mr-3 w-8rem text-right">สถานะ: </label>
@@ -82,6 +89,6 @@
 
 <div class="flex justify-content-center gap-2">
   <button pButton (click)="save()">บันทึก</button>
-  <button pButton (click)="registerForm.reset()">ยกเลิก</button>
+  <button pButton (click)="registerForm.reset({ price: 0 })">ยกเลิก</button>
   <button pButton (click)="goBack()">กลับ</button>
 </div>

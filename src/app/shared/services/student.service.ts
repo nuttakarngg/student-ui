@@ -37,4 +37,5 @@ export class StudentService {
   getAllStudent() {
     return this.studentList;
   }
+
 }

@@ -19,6 +19,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +43,9 @@ import { MessageService } from 'primeng/api';
     MessagesModule,
     MessageModule,
     ToastModule,
+    ConfirmPopupModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

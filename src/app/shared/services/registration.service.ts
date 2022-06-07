@@ -39,5 +39,27 @@ export class RegistrationService {
       ...registration,
     };
     this.registrationList.next([...registrations, payload]);
+    return payload;
+  }
+
+  deleteRegistration(index: number) {
+    const regsitrations = this.registrationList.value;
+    this.registrationList.next(regsitrations.splice(index, 1));
+  }
+
+  getRegistrationById(index: number) {
+    return this.registrationList.value.find(
+      (register) => (register.id = index)
+    );
+  }
+
+  updateRegistration(data: any) {
+    let index = this.registrationList.value.findIndex(
+      (register) => register.id === data.id
+    );
+
+    let registerations = this.registrationList.value;
+    registerations[index] = data;
+    this.registrationList.next(registerations);
   }
 }
