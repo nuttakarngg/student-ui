@@ -57,8 +57,6 @@ export class FormStudentComponent implements OnInit {
   }
 
   save() {
-    console.log(this.registerForm.value);
-
     if (this.registerForm.valid) {
       if (this.mode === Mode.ADD) {
         this.registerForm.patchValue(
